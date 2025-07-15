@@ -207,3 +207,5 @@ test_plan:
 agent_communication:
   - agent: "testing"
     message: "Starting comprehensive frontend testing for Personal Finance Tracker. Will test navigation, dashboard, add expense form, expense list, real-time updates, mobile UX, and error handling."
+  - agent: "testing"
+    message: "TESTING COMPLETED - Found critical issue in ExpenseList component causing infinite API calls due to useEffect dependency problem. Most functionality working well including navigation, dashboard, add expense form, and real-time updates. Detailed findings in status_history."
