@@ -151,15 +151,18 @@ frontend:
 
   - task: "Expense List Testing"
     implemented: true
-    working: "NA"
+    working: false
     file: "/app/frontend/src/components/ExpenseList.js"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "testing"
         comment: "Need to test expense list display, category filtering, expense deletion with confirmation modal, expense grouping by date, and empty state handling"
+      - working: false
+        agent: "testing"
+        comment: "❌ CRITICAL BUG: ExpenseList component has infinite useEffect loop causing 'Maximum update depth exceeded' error. API returns correct data but expenses never display due to continuous re-renders. Issue in useEffect dependency on line 168-171 with loadExpenses function. Filter dropdown works, page UI loads correctly, but expense items never render."
 
   - task: "Real-time Updates"
     implemented: true
