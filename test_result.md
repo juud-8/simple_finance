@@ -219,9 +219,8 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Expense List Testing"
-  stuck_tasks:
-    - "Expense List Testing"
+    - "Complete Application Testing"
+  stuck_tasks: []
   test_all: false
   test_priority: "high_first"
 
