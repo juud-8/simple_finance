@@ -216,13 +216,10 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Navigation Testing"
-    - "Dashboard Functionality"
-    - "Add Expense Form Testing"
     - "Expense List Testing"
-    - "Real-time Updates"
-  stuck_tasks: []
-  test_all: true
+  stuck_tasks:
+    - "Expense List Testing"
+  test_all: false
   test_priority: "high_first"
 
 agent_communication:
