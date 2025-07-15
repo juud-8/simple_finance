@@ -22,7 +22,7 @@ const Navigation = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="fixed bottom-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-t border-gray-200 safe-area-bottom"
+      className="fixed bottom-0 left-0 right-0 z-50 glass-effect border-t border-gray-200 safe-area-bottom bounce-in"
     >
       <div className="max-w-md mx-auto px-4">
         <div className="flex items-center justify-around py-2">
@@ -34,7 +34,8 @@ const Navigation = () => {
               <motion.button
                 key={item.id}
                 onClick={() => handleNavigation(item.path)}
-                className={`nav-item btn-touch ${isActive ? 'active' : ''}`}
+                className={`nav-item btn-touch focus-outline ${isActive ? 'active' : ''}`}
+                tabIndex={0}
                 whileTap={{ scale: 0.9 }}
                 transition={{ duration: 0.1 }}
               >
@@ -45,7 +46,7 @@ const Navigation = () => {
                       layoutId="activeIndicator"
                       className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-primary-500 rounded-full"
                       initial={false}
-                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                      transition={{ type: "spring", stiffness: 700, damping: 25 }}
                     />
                   )}
                 </div>
