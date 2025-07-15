@@ -33,7 +33,8 @@ const TopCategoryItem = ({ category, amount, count, delay }) => (
     initial={{ opacity: 0, x: -20 }}
     animate={{ opacity: 1, x: 0 }}
     transition={{ duration: 0.3, delay }}
-    className="flex items-center justify-between py-3 px-4 bg-white/50 rounded-xl"
+    className="flex items-center justify-between py-3 px-4 glass-effect rounded-xl focus-outline"
+    tabIndex={0}
   >
     <div className="flex items-center space-x-3">
       <div className="w-8 h-8 bg-gradient-to-br from-primary-400 to-primary-500 rounded-full flex items-center justify-center">
@@ -113,12 +114,12 @@ const Dashboard = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 card-shadow"
+            className="glass-effect rounded-2xl p-6 card-shadow"
           >
             <h3 className="text-lg font-semibold text-secondary-900 mb-4">
               Top Categories This Month
             </h3>
-            <div className="space-y-3">
+            <div className="space-y-3 stagger-list">
               {summaries.month.top_categories.slice(0, 5).map((category, index) => (
                 <TopCategoryItem
                   key={category.category}

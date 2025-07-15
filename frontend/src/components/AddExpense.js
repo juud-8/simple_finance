@@ -74,7 +74,7 @@ const AddExpense = () => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="bg-success-50 border border-success-200 rounded-2xl p-8 text-center"
+          className="bg-success-50 border border-success-200 rounded-2xl p-8 text-center bounce-in"
         >
           <div className="w-16 h-16 bg-success-500 rounded-full flex items-center justify-center mx-auto mb-4">
             <FiCheck className="w-8 h-8 text-white" />
@@ -125,7 +125,7 @@ const AddExpense = () => {
               step="0.01"
               min="0"
               placeholder="0.00"
-              className="form-input pl-12"
+              className="form-input pl-12 focus-outline"
               {...register('amount', {
                 required: 'Amount is required',
                 min: { value: 0.01, message: 'Amount must be greater than 0' }
@@ -147,7 +147,7 @@ const AddExpense = () => {
             Category *
           </label>
           <select
-            className="form-select"
+            className="form-select focus-outline"
             {...register('category', { required: 'Category is required' })}
           >
             <option value="">Select a category</option>
@@ -171,7 +171,7 @@ const AddExpense = () => {
           <textarea
             rows="3"
             placeholder="What did you spend on?"
-            className="form-input resize-none"
+            className="form-input resize-none focus-outline"
             {...register('description')}
           />
         </div>
@@ -183,7 +183,7 @@ const AddExpense = () => {
           </label>
           <input
             type="date"
-            className="form-input"
+            className="form-input focus-outline"
             {...register('date', { required: 'Date is required' })}
           />
           {errors.date && (
@@ -195,7 +195,7 @@ const AddExpense = () => {
         <motion.button
           type="submit"
           disabled={isSubmitting}
-          className="w-full btn-primary"
+          className="w-full btn-primary focus-outline"
           whileTap={{ scale: 0.98 }}
           transition={{ duration: 0.1 }}
         >
@@ -215,7 +215,7 @@ const AddExpense = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="mt-8"
+        className="mt-8 stagger-list"
       >
         <h3 className="text-lg font-semibold text-secondary-900 mb-4">
           Quick Category Selection
@@ -231,7 +231,8 @@ const AddExpense = () => {
                 categorySelect.value = category.name;
                 categorySelect.dispatchEvent(new Event('change', { bubbles: true }));
               }}
-              className="p-4 bg-white/70 backdrop-blur-sm rounded-xl card-shadow hover:card-shadow-hover transition-all duration-200 flex flex-col items-center space-y-2"
+              className="p-4 glass-effect rounded-xl card-shadow hover:card-shadow-hover transition-all duration-200 flex flex-col items-center space-y-2 focus-outline"
+              tabIndex={0}
               whileTap={{ scale: 0.95 }}
             >
               <span className="text-2xl">{getCategoryIcon(category.name)}</span>
