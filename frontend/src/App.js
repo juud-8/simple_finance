@@ -7,6 +7,7 @@ import ExpenseList from './components/ExpenseList';
 import Navigation from './components/Navigation';
 import Header from './components/Header';
 import { ExpenseProvider } from './context/ExpenseContext';
+import BudgetBubbles from './components/BudgetBubbles';
 import './App.css';
 
 function App() {
@@ -87,6 +88,20 @@ function App() {
                       transition={{ duration: 0.3 }}
                     >
                       <ExpenseList />
+                    </motion.div>
+                  }
+                />
+                <Route
+                  path="/budgets"
+                  element={
+                    <motion.div
+                      key="budgets"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <BudgetBubbles />
                     </motion.div>
                   }
                 />

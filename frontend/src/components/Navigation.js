@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiHome, FiPlus, FiList } from 'react-icons/fi';
+import { FiPieChart } from 'react-icons/fi';
 
 const Navigation = () => {
   const location = useLocation();
@@ -11,6 +12,7 @@ const Navigation = () => {
     { id: 'dashboard', label: 'Dashboard', icon: FiHome, path: '/' },
     { id: 'add', label: 'Add', icon: FiPlus, path: '/add' },
     { id: 'expenses', label: 'Expenses', icon: FiList, path: '/expenses' },
+    { id: 'budgets', label: 'Budgets', icon: FiPieChart, path: '/budgets' },
   ];
 
   const handleNavigation = (path) => {
