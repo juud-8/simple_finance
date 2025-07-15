@@ -168,7 +168,7 @@ const ExpenseList = () => {
   useEffect(() => {
     // Load more expenses when component mounts
     loadExpenses({ limit: 100 });
-  }, [loadExpenses]);
+  }, []); // Remove loadExpenses from dependencies to prevent infinite loop
 
   useEffect(() => {
     let filtered = expenses;
