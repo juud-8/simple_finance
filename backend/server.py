@@ -36,6 +36,7 @@ db = client[DATABASE_NAME]
 expenses_collection = db.expenses
 categories_collection = db.categories
 users_collection = db.users
+budgets_collection = db.budgets  # NEW
 
 # Security
 security = HTTPBearer()
@@ -70,6 +71,21 @@ class SpendingSummary(BaseModel):
     expense_count: int
     top_categories: List[dict]
 
+# Budget Models
+class BudgetCreate(BaseModel):
+    name: str = Field(..., min_length=1, max_length=50)
+    amount: float = Field(..., gt=0)
+    category: Optional[str] = Field(None, max_length=50)
+    user_id: Optional[str] = None
+
+class BudgetResponse(BaseModel):
+    id: str
+    name: str
+    amount: float
+    spent: float
+    category: Optional[str]
+    user_id: Optional[str]
+
 # Utility functions
 def expense_to_dict(expense) -> dict:
     return {
@@ -86,6 +102,16 @@ def category_to_dict(category) -> dict:
         "name": category["name"],
         "color": category["color"],
         "icon": category.get("icon")
+    }
+
+def budget_to_dict(budget) -> dict:
+    return {
+        "id": str(budget["_id"]),
+        "name": budget["name"],
+        "amount": budget["amount"],
+        "spent": budget.get("spent", 0),
+        "category": budget.get("category"),
+        "user_id": budget.get("user_id"),
     }
 
 # Initialize default categories
@@ -329,6 +355,63 @@ async def delete_expense(expense_id: str):
         return {"message": "Expense deleted successfully"}
     except HTTPException:
         raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Budget Endpoints
+@app.get("/api/budgets", response_model=List[BudgetResponse])
+async def get_budgets(user_id: Optional[str] = None):
+    try:
+        query = {"user_id": user_id} if user_id else {}
+        budgets = list(budgets_collection.find(query))
+        return [BudgetResponse(**budget_to_dict(b)) for b in budgets]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/budgets", response_model=BudgetResponse)
+async def create_budget(budget: BudgetCreate):
+    try:
+        budget_data = {
+            "_id": str(uuid.uuid4()),
+            "name": budget.name,
+            "amount": budget.amount,
+            "spent": 0,
+            "category": budget.category,
+            "user_id": budget.user_id,
+            "created_at": datetime.now(),
+        }
+        result = budgets_collection.insert_one(budget_data)
+        if result.inserted_id:
+            return BudgetResponse(**budget_to_dict(budget_data))
+        else:
+            raise HTTPException(status_code=500, detail="Failed to create budget")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.put("/api/budgets/{budget_id}", response_model=BudgetResponse)
+async def update_budget(budget_id: str, budget: BudgetCreate):
+    try:
+        update_data = {
+            "name": budget.name,
+            "amount": budget.amount,
+            "category": budget.category,
+            "user_id": budget.user_id,
+        }
+        result = budgets_collection.update_one({"_id": budget_id}, {"$set": update_data})
+        if result.matched_count == 0:
+            raise HTTPException(status_code=404, detail="Budget not found")
+        updated = budgets_collection.find_one({"_id": budget_id})
+        return BudgetResponse(**budget_to_dict(updated))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.delete("/api/budgets/{budget_id}")
+async def delete_budget(budget_id: str):
+    try:
+        result = budgets_collection.delete_one({"_id": budget_id})
+        if result.deleted_count == 0:
+            raise HTTPException(status_code=404, detail="Budget not found")
+        return {"message": "Budget deleted successfully"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
