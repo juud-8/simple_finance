@@ -50,7 +50,8 @@ const ExpenseItem = ({ expense, onDelete }) => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.3 }}
-        className="bg-white/70 backdrop-blur-sm rounded-xl p-4 card-shadow hover:card-shadow-hover transition-all duration-200"
+        className="glass-effect rounded-xl p-4 card-shadow hover:card-shadow-hover transition-all duration-200 focus-outline"
+        tabIndex={0}
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3 flex-1">
@@ -101,7 +102,8 @@ const ExpenseItem = ({ expense, onDelete }) => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.2 }}
-              className="bg-white rounded-2xl p-6 max-w-sm w-full"
+              className="glass-effect rounded-2xl p-6 max-w-sm w-full focus-outline"
+              tabIndex={0}
             >
               <h3 className="text-lg font-semibold text-secondary-900 mb-2">
                 Delete Expense
@@ -136,7 +138,7 @@ const ExpenseGroup = ({ group, onDelete }) => (
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.3 }}
-    className="mb-6"
+    className="mb-6 stagger-list"
   >
     <div className="flex items-center justify-between mb-3 px-1">
       <h3 className="text-lg font-semibold text-secondary-900">
@@ -240,7 +242,7 @@ const ExpenseList = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center py-12"
+          className="text-center py-12 bounce-in"
         >
           <div className="w-16 h-16 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <FiDollarSign className="w-8 h-8 text-secondary-400" />
