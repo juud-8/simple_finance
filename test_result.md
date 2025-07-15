@@ -98,3 +98,112 @@ All API endpoints use `/api` prefix and return JSON:
 - DELETE /api/expenses/{id} - Delete expense
 
 Ready for frontend testing if user requests it.
+
+---
+
+# Frontend Testing Tasks
+
+frontend:
+  - task: "Navigation Testing"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Navigation.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Need to test bottom navigation between Dashboard, Add, and Expenses pages with smooth animations and transitions"
+
+  - task: "Dashboard Functionality"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Need to test loading of day/week/month spending summaries, display of amounts and counts, top categories display, loading states and error handling"
+
+  - task: "Add Expense Form Testing"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/AddExpense.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Need to test form validation, category selection, expense creation, success message, navigation after creation, form reset, and quick category selection"
+
+  - task: "Expense List Testing"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/ExpenseList.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Need to test expense list display, category filtering, expense deletion with confirmation modal, expense grouping by date, and empty state handling"
+
+  - task: "Real-time Updates"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/context/ExpenseContext.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Need to test that adding an expense updates dashboard immediately, expense list shows new items, and summary totals update correctly"
+
+  - task: "Mobile UX Testing"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Need to test touch interactions, button sizes, responsive design on mobile viewport, form inputs on mobile, PWA features and loading screens"
+
+  - task: "Error Handling"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/services/expenseService.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Need to test API error scenarios, form validation errors, and loading states during API calls"
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 1
+
+test_plan:
+  current_focus:
+    - "Navigation Testing"
+    - "Dashboard Functionality"
+    - "Add Expense Form Testing"
+    - "Expense List Testing"
+    - "Real-time Updates"
+  stuck_tasks: []
+  test_all: true
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "testing"
+    message: "Starting comprehensive frontend testing for Personal Finance Tracker. Will test navigation, dashboard, add expense form, expense list, real-time updates, mobile UX, and error handling."
